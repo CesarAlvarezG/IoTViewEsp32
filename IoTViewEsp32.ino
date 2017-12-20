@@ -1,3 +1,10 @@
+/*
+ * Desarrollado por: César Augusto Álvarez Gaspar
+ * Proyecto iniciado en:  20/Dic/2017
+ * Testeado en:
+ *            +Tarjeta de desarrollo EASY KIT ESP32-C1 de Geekworm
+ */
+
 #include <dummy.h>
 
 #define LED_BUILTIN 27
