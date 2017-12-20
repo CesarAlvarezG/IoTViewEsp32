@@ -6,7 +6,7 @@
  */
 
 #include <dummy.h>
-
+#include "configLocal.h"
 #define LED_BUILTIN 27
 
 String Cadena="";
@@ -16,7 +16,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println("IoTView en ESP32");
   Serial.println("Desarrollado por:");
-  Serial.println("Ing. César Augusto Alvarez Gaspar");
+  Serial.println("Ing. César Augusto Álvarez Gaspar");
  Cadena="";
 
 }
