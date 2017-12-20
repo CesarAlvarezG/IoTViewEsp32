@@ -9,9 +9,15 @@
 
 #define LED_BUILTIN 27
 
+String Cadena="";
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(115200);
+  Serial.println("IoTView en ESP32");
+  Serial.println("Desarrollado por:");
+  Serial.println("Ing. César Augusto Alvarez Gaspar");
+ Cadena="";
 
 }
 
@@ -21,4 +27,13 @@ void loop() {
   delay(1000);                       
   digitalWrite(LED_BUILTIN, LOW);    
   delay(1000);
+  if(Serial.available()>0)
+  {
+    Cadena=Serial.readStringUntil('\n');
+    Serial.println(Cadena);
+    int i =Cadena.toInt();
+    Serial.println(i);
+    float j=Cadena.toFloat();
+    Serial.println(j); 
+  }
 }
