@@ -6,8 +6,13 @@
  */
 
 #include <dummy.h>
-#include "configLocal.h"
+#include "ConfigLocal.h"
+#include "SenalesPrueba.h"
+
 #define LED_BUILTIN 27
+#define LED_TEST 0
+
+#define TPrueba 50
 
 String Cadena="";
 
@@ -22,18 +27,24 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  digitalWrite(LED_BUILTIN, HIGH);   
-  delay(1000);                       
-  digitalWrite(LED_BUILTIN, LOW);    
-  delay(1000);
-  if(Serial.available()>0)
-  {
-    Cadena=Serial.readStringUntil('\n');
-    Serial.println(Cadena);
-    int i =Cadena.toInt();
-    Serial.println(i);
-    float j=Cadena.toFloat();
-    Serial.println(j); 
-  }
+    for(int i=0;i<N_SENO;i++)
+    {
+      Serial.println(PruebaSin[i]);
+      delay(TPrueba); 
+    }
+    for(int i=0;i<N_ECG;i++)
+    {
+      Serial.println(EcgNormal[i]);
+      delay(TPrueba); 
+    }
+    for(int i=0;i<N_ECG_ALETEO;i++)
+    {
+      Serial.println(EcgAleteo[i]);
+      delay(TPrueba); 
+    }
+    for(int i=0;i<N_ECG_SINUSAL;i++)
+    {
+      Serial.println(EcgSinusal[i]);
+      delay(TPrueba); 
+    }
 }
