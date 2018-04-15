@@ -38,7 +38,17 @@ void setup() {
 }
 
 void loop() {
-  
+  Serial.print("connecting to ");
+  Serial.println(host);
+  WiFiClient client;
+  const int httpPort = 80;
+  if (!client.connect(host, httpPort)) {
+        Serial.println("Conexion Exitosa");
+        return;
+    }else{
+        Serial.println("Conexion exitosa");
+      }
+
   
   /*  for(int i=0;i<N_SENO;i++)
     {
