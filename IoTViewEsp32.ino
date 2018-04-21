@@ -44,8 +44,8 @@ void setup() {
           Serial.println("Conexion Exitosa");
           client.println("GET / HTTP/1.1");
           Serial.println("GET / HTTP/1.1");
-          client.println("Host: www.iotview.herokuapp.com");
-          Serial.println("Host: www.iotview.herokuapp.com");
+          client.println("Host: iotview.herokuapp.com");
+          Serial.println("Host: iotview.herokuapp.com");
           client.println();
           Serial.println();
           return;
@@ -82,4 +82,4 @@ void loop() {
       delay(TPrueba); 
     }
     */
-}
+} 
