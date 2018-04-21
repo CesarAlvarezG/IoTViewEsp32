@@ -16,6 +16,7 @@
 char host[]="iotview.herokuapp.com";
 
 int status = WL_IDLE_STATUS;
+WiFiClient client;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -35,22 +36,32 @@ void setup() {
     Serial.println("WiFi connected");
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
+    Serial.print("connecting to ");
+    Serial.println(host);
+    
+    const int httpPort = 80;
+    if (client.connect(host, httpPort)!=0) {
+          Serial.println("Conexion Exitosa");
+          client.println("GET / HTTP/1.1");
+          Serial.println("GET / HTTP/1.1");
+          client.println("Host: www.iotview.herokuapp.com");
+          Serial.println("Host: www.iotview.herokuapp.com");
+          client.println();
+          Serial.println();
+          return;
+      }else{
+          Serial.println("Conexion exitosa");
+        }
 }
 
 void loop() {
-  Serial.print("connecting to ");
-  Serial.println(host);
-  WiFiClient client;
-  const int httpPort = 80;
-  if (!client.connect(host, httpPort)) {
-        Serial.println("Conexion Exitosa");
-        return;
-    }else{
-        Serial.println("Conexion exitosa");
-      }
-
-  
-  /*  for(int i=0;i<N_SENO;i++)
+  char c;
+  if(client.available()>0){
+        c=client.read();
+        Serial.print(c);
+    }
+    /*
+    for(int i=0;i<N_SENO;i++)
     {
       Serial.println(PruebaSin[i]);
       delay(TPrueba); 
@@ -69,6 +80,6 @@ void loop() {
     {
       Serial.println(EcgSinusal[i]);
       delay(TPrueba); 
-    }*/
-    
+    }
+    */
 }
