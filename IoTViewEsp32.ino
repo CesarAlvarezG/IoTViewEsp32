@@ -10,13 +10,18 @@
 #include "ConfigLocal.h"
 #include "IoTEsp32.h"
 #include "SenalesPrueba.h"
+#include "IotView.h"
 
 #define TPrueba 50
-
 char host[]="iotview.herokuapp.com";
+const int httpPort = 80;
 
+
+String Solicitud;
 int status = WL_IDLE_STATUS;
 WiFiClient client;
+
+int sensor=5;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -39,7 +44,7 @@ void setup() {
     Serial.print("connecting to ");
     Serial.println(host);
     
-    const int httpPort = 80;
+    
     if (client.connect(host, httpPort)!=0) {
           Serial.println("Conexion Exitosa");
           client.println("GET / HTTP/1.1");
@@ -60,12 +65,30 @@ void loop() {
         c=client.read();
         Serial.print(c);
     }
-    /*
+    
     for(int i=0;i<N_SENO;i++)
     {
-      Serial.println(PruebaSin[i]);
-      delay(TPrueba); 
+       if (client.connect(host, httpPort)!=0) {
+          Solicitud="GET";
+          Solicitud+=" /iot/";
+          Solicitud+=sensor;
+          Solicitud+="/";
+          Solicitud+=senalSin(i);
+          Solicitud+=" HTTP/1.1";
+          client.println(Solicitud);
+          Serial.println(Solicitud    );
+          client.println("Host: iotview.herokuapp.com");
+          Serial.println("Host: iotview.herokuapp.com");
+          client.println();
+          Serial.println();
+          while(client.available()>0){
+              c=client.read();
+              Serial.print(c);
+          }
+          delay(TPrueba);
+       } 
     }
+    /*
     for(int i=0;i<N_ECG;i++)
     {
       Serial.println(EcgNormal[i]);
